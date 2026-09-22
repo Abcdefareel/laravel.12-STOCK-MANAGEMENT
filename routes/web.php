@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 // TRLALALA INI DARI CHANDRA
 // INI DARI FARREL
 
-
+// sembarang
 // auth
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
