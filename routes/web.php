@@ -9,6 +9,7 @@ use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 // TRLALALA INI DARI CHANDRA
+// INI DARI FARREL
 
 
 // auth
