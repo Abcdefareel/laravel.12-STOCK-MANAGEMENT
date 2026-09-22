@@ -8,6 +8,8 @@ use App\Http\Controllers\StockMovementController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
+// TRLALALA INI DARI CHANDRA
+
 
 // auth
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
