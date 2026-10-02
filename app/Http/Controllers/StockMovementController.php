@@ -49,7 +49,7 @@ class StockMovementController extends Controller
 
         if ($request['movement_type'] == 'out') {
             if ($totalStock < $request['stock_amount']) {
-                return redirect('/stock-movements')->with('error', 'jumlah stock lebih sedikit dari total stock');
+                return redirect('/stock-movements')->with('error', 'There is not enough stock available for this movement.');
             }
         }
 
@@ -99,7 +99,7 @@ class StockMovementController extends Controller
 
         if ($request['movement_type'] == 'out') {
             if ($totalStock < $request['stock_amount']) {
-                return redirect('/stock-movements')->with('error', 'jumlah stock lebi sedikit dari total stock');
+                return redirect('/stock-movements')->with('error', 'There is not enough stock available for this movement.');
             }
         }
 
@@ -131,7 +131,7 @@ class StockMovementController extends Controller
                 'stock_amount' => 0
             ]);
         });
-        
+
         return redirect('/stock-movements');
     }
 }

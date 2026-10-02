@@ -12,7 +12,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::where('type', 'like', '%' . $request['search']. '%')->paginate(10)->withQueryString();
+        $categories = Category::where('type', 'like', '%' . $request['search'] . '%')->paginate(10)->withQueryString();
         return view('category.index', ['categories' => $categories]);
         //
     }
@@ -81,7 +81,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $hasil = $category->products->count();
         if ($hasil > 0) {
-            return redirect('/categories')->with('error', 'tidak bisa menghapus kategori');
+            return redirect('/categories')->with('error', 'This category cannot be deleted because it has associated products.');
         }
         $data = Category::find($id)->delete();
         return redirect('/categories');

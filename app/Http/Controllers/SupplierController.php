@@ -12,7 +12,7 @@ class SupplierController extends Controller
      */
     public function index(Request $request)
     {
-        $suppliers = Supplier::where('name_supplier', 'like', '%'. $request['search']. '%')->paginate(10)->withQueryString();
+        $suppliers = Supplier::where('name_supplier', 'like', '%' . $request['search'] . '%')->paginate(10)->withQueryString();
         return view('supplier.index', ['suppliers' => $suppliers]);
         //
     }
@@ -82,11 +82,10 @@ class SupplierController extends Controller
         $supplier = Supplier::find($id);
         $hasil = $supplier->products->count();
         if ($hasil > 0) {
-            return redirect('/suppliers')->with('error', 'tidak bisa menghapus supplier');
+            return redirect('/suppliers')->with('error', 'This supplier cannot be deleted because it has associated products.');
         }
 
         $data = Supplier::find($id)->delete();
         return redirect('/suppliers');
-        
     }
 }

@@ -78,10 +78,10 @@ class ProductController extends Controller
         ]);
 
         $data = Product::find($id)->update($request->all());
-        
+
         return redirect('/products');
 
-    //
+        //
     }
 
     /**
@@ -92,7 +92,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $hasil = $product->stockMovements->count();
         if ($hasil > 0) {
-            return redirect('/products')->with('error', 'tidak dapat menghapus product');
+            return redirect('/products')->with('error', 'This product cannot be deleted because it has stock movement records.');
         }
         $data = Product::find($id)->delete();
         return redirect('/products');

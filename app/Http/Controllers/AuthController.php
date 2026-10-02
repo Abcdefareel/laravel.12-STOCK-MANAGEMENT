@@ -10,20 +10,22 @@ use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
-    public function showRegisterForm() {
+    public function showRegisterForm()
+    {
         return view('auth.register');
-    }    
+    }
 
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email',
             'password' =>  ['required', Password::min(8)->mixedCase()]
         ], [
-            'name.required' => 'nama harus diisi',
-            'email.unique' => 'email sudah terpakai',
-            'email.required' => 'email harus diisi'
-        ]); 
+            'name.required' => 'Name is required.',
+            'email.unique' => 'This email address is already in use.',
+            'email.required' => 'Email address is required.'
+        ]);
 
         try {
             User::create($request->all());
@@ -32,35 +34,37 @@ class AuthController extends Controller
             report($e);
             return back();
         }
+    }
 
-    }    
-
-    public function showLoginForm() {
+    public function showLoginForm()
+    {
         if (Auth::check()) {
             return redirect('/dashboard');
         }
         return view('auth.login');
-    }    
+    }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $request->validate([
             'email' => 'required',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-            return redirect('/');
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect('/dashboard');
         } else {
-            return redirect('/login')->with('error', 'email atau password salah');
+            return redirect('/login')->with('error', 'The email address or password is incorrect.');
         }
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login');
     }
 
-//
+    //
 }
